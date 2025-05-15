@@ -41,23 +41,25 @@
             clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
             selector: "#webchat",
             configuration: {
-              themeName: "prism",
-              enableReset: true,
-              showPoweredBy: false,
-              themeMode: "light",
-              containerWidth: "100%",
-              layoutWidth: "100%",
               color: "#3B82F6",
-              fontFamily: "inter",  // aqui corrigido para minúsculo
-              radius: 1
+              variant: "solid",
+              themeMode: "light",
+              fontFamily: "inter", // ✔️ corrigido
+              radius: 1,
+              // As opções abaixo são opcionais e foram mantidas:
+              website: {},
+              email: {},
+              phone: {},
+              termsOfService: {},
+              privacyPolicy: {}
             }
           });
 
           window.botpress.on("webchat:ready", () => {
-            window.botpress.open();
+            window.botpress.open(); // Abre o chat automaticamente
           });
         } else {
-          console.error("botpress não está definido após carregar o script.");
+          console.error("Erro ao carregar o Botpress.");
         }
       };
       document.head.appendChild(script);
