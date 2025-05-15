@@ -16,15 +16,19 @@
       const script = document.createElement("script");
       script.src = "https://cdn.botpress.cloud/webchat/v2/inject.js";
       script.onload = () => {
-        window.botpressWebChat.init({
-          host: "https://cdn.botpress.cloud/webchat/v2",
-          botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
-          clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
-          containerWidth: "100%",
-          layoutWidth: "100%",
-          showPoweredBy: false,
-          enableConversationDeletion: true
-        });
+        if (window.botpressWebChat) {
+          window.botpressWebChat.init({
+            host: "https://cdn.botpress.cloud/webchat/v2",
+            botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
+            clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
+            containerWidth: "100%",
+            layoutWidth: "100%",
+            showPoweredBy: false,
+            enableConversationDeletion: true
+          });
+        } else {
+          console.error("botpressWebChat não carregou corretamente.");
+        }
       };
       document.head.appendChild(script);
     </script>
