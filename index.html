@@ -9,26 +9,56 @@
         margin: 0;
         padding: 0;
       }
+
+      #webchat .bpWebchat {
+        position: unset !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        max-width: 100% !important;
+      }
+
+      #webchat .bpFab {
+        display: none !important;
+      }
+
+      #webchat {
+        width: 100vw;
+        height: 100vh;
+      }
     </style>
   </head>
   <body>
+    <div id="webchat"></div>
+
     <script>
       const script = document.createElement("script");
-      script.src = "https://cdn.botpress.cloud/webchat/v2/inject.js";
+      script.src = "https://cdn.botpress.cloud/webchat/v2.4/inject.js";
       script.onload = () => {
-        if (window.botpressWebChat) {
-          window.botpressWebChat.init({
-            host: "https://cdn.botpress.cloud/webchat/v2",
-            botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
-            clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
-            containerWidth: "100%",
-            layoutWidth: "100%",
+        window.botpress.init({
+          botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
+          clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
+          selector: "#webchat",
+          configuration: {
+            themeName: "prism",
+            extraStylesheet: "",
+            enableReset: true,
             showPoweredBy: false,
-            enableConversationDeletion: true
-          });
-        } else {
-          console.error("botpressWebChat não carregou corretamente.");
-        }
+            botConversationDescription: "Olá! Como posso ajudar?",
+            botName: "Atendente Virtual",
+            avatarUrl: "",
+            themeMode: "light",
+            layoutWidth: "100%",
+            containerWidth: "100%",
+            color: "#3B82F6",
+            fontFamily: "Inter",
+            radius: 1
+          }
+        });
+
+        window.botpress.on("webchat:ready", () => {
+          window.botpress.open();
+        });
       };
       document.head.appendChild(script);
     </script>
