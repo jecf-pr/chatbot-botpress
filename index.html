@@ -1,23 +1,44 @@
-<script>
-  console.log("✅ Script carregado!");
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Botpress Chatbot</title>
+    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+  </head>
+  <body>
+    <h1>Chatbot Teste</h1>
 
-  window.botpressWebChat.init({
-    "botId": "acbf5504-742d-4241-93ca-816cf95ed2b9",
-    "clientId": "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
-    "hostUrl": "https://cdn.botpress.cloud/webchat/v2.4",
-    "messagingUrl": "https://messaging.botpress.cloud",
-    "botName": "Meu Chatbot",
-    "containerWidth": "100%",
-    "layoutWidth": "100%",
-    "hideWidget": false,
-    "showCloseButton": true,
-    "enableReset": true,
-    "showPoweredBy": false,
-    "themeName": "prism",
-    "theme": "prism",
-    "fontFamily": "inter",
-    "avatarUrl": "",
-    "stylesheet": "",
-    "useSessionStorage": true
-  });
-</script>
+    <script>
+      console.log("✅ Script carregado, esperando botpress...");
+
+      // Aguarda o script botpressWebChat ser carregado
+      window.addEventListener("DOMContentLoaded", function () {
+        const waitForBotpress = setInterval(() => {
+          if (window.botpressWebChat) {
+            clearInterval(waitForBotpress);
+            console.log("✅ Botpress carregado!");
+
+            window.botpressWebChat.init({
+              "botId": "acbf5504-742d-4241-93ca-816cf95ed2b9",
+              "clientId": "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
+              "hostUrl": "https://cdn.botpress.cloud/webchat/v2.4",
+              "messagingUrl": "https://messaging.botpress.cloud",
+              "botName": "Meu Chatbot",
+              "containerWidth": "100%",
+              "layoutWidth": "100%",
+              "hideWidget": false,
+              "showCloseButton": true,
+              "enableReset": true,
+              "showPoweredBy": false,
+              "themeName": "prism",
+              "theme": "prism",
+              "fontFamily": "inter",
+              "useSessionStorage": true
+            });
+
+            window.botpressWebChat.sendEvent({ type: "show" });
+          }
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
