@@ -35,30 +35,30 @@
       const script = document.createElement("script");
       script.src = "https://cdn.botpress.cloud/webchat/v2.4/inject.js";
       script.onload = () => {
-        window.botpress.init({
-          botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
-          clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
-          selector: "#webchat",
-          configuration: {
-            themeName: "prism",
-            extraStylesheet: "",
-            enableReset: true,
-            showPoweredBy: false,
-            botConversationDescription: "Olá! Como posso ajudar?",
-            botName: "Atendente Virtual",
-            avatarUrl: "",
-            themeMode: "light",
-            layoutWidth: "100%",
-            containerWidth: "100%",
-            color: "#3B82F6",
-            fontFamily: "Inter",
-            radius: 1
-          }
-        });
+        if (window.botpress) {
+          window.botpress.init({
+            botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
+            clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
+            selector: "#webchat",
+            configuration: {
+              themeName: "prism",
+              enableReset: true,
+              showPoweredBy: false,
+              themeMode: "light",
+              containerWidth: "100%",
+              layoutWidth: "100%",
+              color: "#3B82F6",
+              fontFamily: "inter",  // aqui corrigido para minúsculo
+              radius: 1
+            }
+          });
 
-        window.botpress.on("webchat:ready", () => {
-          window.botpress.open();
-        });
+          window.botpress.on("webchat:ready", () => {
+            window.botpress.open();
+          });
+        } else {
+          console.error("botpress não está definido após carregar o script.");
+        }
       };
       document.head.appendChild(script);
     </script>
