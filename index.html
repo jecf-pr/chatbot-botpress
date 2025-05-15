@@ -1,68 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Chatbot Botpress</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+<html>
+<head>
+  <title>Chatbot Botpress</title>
+  <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+</head>
+<body>
+  <div id="webchat" style="width: 500px; height: 500px;"></div>
+
+  <script>
+    // Espera o carregamento completo do script
+    function waitForBotpressWebChat() {
+      if (window.botpressWebChat && typeof window.botpressWebChat.init === 'function') {
+        window.botpressWebChat.init({
+          botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
+          clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
+          hostUrl: "https://cdn.botpress.cloud/webchat/v2.4",
+          messagingUrl: "https://messaging.botpress.cloud",
+          containerWidth: "100%",
+          layoutWidth: "100%",
+          showCloseButton: true,
+          enableConversationDeletion: true,
+          themeName: "prism",
+          theme: "prism",
+          stylesheet: "https://cdn.botpress.cloud/webchat/v2.4/themes/prism.css"
+        });
+      } else {
+        setTimeout(waitForBotpressWebChat, 100);
       }
+    }
 
-      #webchat .bpWebchat {
-        position: unset !important;
-        width: 100% !important;
-        height: 100% !important;
-        max-height: 100% !important;
-        max-width: 100% !important;
-      }
-
-      #webchat .bpFab {
-        display: none !important;
-      }
-
-      #webchat {
-        width: 100vw;
-        height: 100vh;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="webchat"></div>
-
-    <script>
-      const script = document.createElement("script");
-      script.src = "https://cdn.botpress.cloud/webchat/v2.4/inject.js";
-      script.onload = () => {
-        if (window.botpress) {
-          window.botpress.init({
-            botId: "acbf5504-742d-4241-93ca-816cf95ed2b9",
-            clientId: "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
-            selector: "#webchat",
-            configuration: {
-              color: "#3B82F6",
-              variant: "solid",
-              themeMode: "light",
-              fontFamily: "inter", // ✔️ corrigido
-              radius: 1,
-              // As opções abaixo são opcionais e foram mantidas:
-              website: {},
-              email: {},
-              phone: {},
-              termsOfService: {},
-              privacyPolicy: {}
-            }
-          });
-
-          window.botpress.on("webchat:ready", () => {
-            window.botpress.open(); // Abre o chat automaticamente
-          });
-        } else {
-          console.error("Erro ao carregar o Botpress.");
-        }
-      };
-      document.head.appendChild(script);
-    </script>
-  </body>
+    waitForBotpressWebChat();
+  </script>
+</body>
 </html>
