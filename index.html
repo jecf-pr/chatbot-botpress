@@ -1,44 +1,42 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Botpress Chatbot</title>
-    <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
-  </head>
-  <body>
-    <h1>Chatbot Teste</h1>
 
-    <script>
-      console.log("✅ Script carregado, esperando botpress...");
+<script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
+<style>
+  #webchat .bpWebchat {
+    position: unset;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
+  }
 
-      // Aguarda o script botpressWebChat ser carregado
-      window.addEventListener("DOMContentLoaded", function () {
-        const waitForBotpress = setInterval(() => {
-          if (window.botpressWebChat) {
-            clearInterval(waitForBotpress);
-            console.log("✅ Botpress carregado!");
+  #webchat .bpFab {
+    display: none;
+  }
+</style>
 
-            window.botpressWebChat.init({
-              "botId": "acbf5504-742d-4241-93ca-816cf95ed2b9",
-              "clientId": "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
-              "hostUrl": "https://cdn.botpress.cloud/webchat/v2.4",
-              "messagingUrl": "https://messaging.botpress.cloud",
-              "botName": "Meu Chatbot",
-              "containerWidth": "100%",
-              "layoutWidth": "100%",
-              "hideWidget": false,
-              "showCloseButton": true,
-              "enableReset": true,
-              "showPoweredBy": false,
-              "themeName": "prism",
-              "theme": "prism",
-              "fontFamily": "inter",
-              "useSessionStorage": true
-            });
+<!-- Put this on your page BEFORE the script below -->
+<div id="webchat" style="width: 500px; height: 500px;"></div>
 
-            window.botpressWebChat.sendEvent({ type: "show" });
-          }
-        }, 100);
-      });
-    </script>
-  </body>
-</html>
+<!-- In your <body> tag -->
+<script>
+  window.botpress.on("webchat:ready", () => {
+    window.botpress.open();
+  });
+  window.botpress.init({
+  "botId": "acbf5504-742d-4241-93ca-816cf95ed2b9",
+  "configuration": {
+    "website": {},
+    "email": {},
+    "phone": {},
+    "termsOfService": {},
+    "privacyPolicy": {},
+    "color": "#3B82F6",
+    "variant": "solid",
+    "themeMode": "light",
+    "fontFamily": "inter",
+    "radius": 1
+  },
+  "clientId": "3d43f9e1-cf6f-4a1c-b254-3d7906744d47",
+  "selector": "#webchat"
+});
+</script>
